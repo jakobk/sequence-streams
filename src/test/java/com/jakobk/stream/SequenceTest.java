@@ -1,9 +1,14 @@
 package com.jakobk.stream;
 
-import junit.framework.Assert;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RunWith(JUnit4.class)
 public class SequenceTest {
@@ -21,5 +26,54 @@ public class SequenceTest {
         Assert.assertEquals(98, Sequence.stream(0, 100, 2).max().getAsInt());
         Assert.assertEquals(0, Sequence.stream(0, 100, 2).min().getAsInt());
     }
+
+    @Test
+    public void testDemonstration() throws Exception {
+        // classic Java
+        List<Person> persons = new ArrayList<Person>(100);
+        for (int i = 0; i < 100; i++) {
+            persons.add(new Person(i));
+        }
+
+        // Java 8 + Sequence
+        List<Person> persons2 = Sequence.stream(0, 100).mapToObj(Person::new).collect(Collectors.toList());
+
+        // both should produce the same result
+        Assert.assertTrue(Arrays.deepEquals(persons.toArray(), persons2.toArray()));
+    }
+
+    public static class Person {
+
+        private final int id;
+
+        public Person(int id) {
+            this.id = id;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (!(o instanceof Person)) return false;
+
+            Person person = (Person) o;
+
+            if (id != person.id) return false;
+
+            return true;
+        }
+
+        @Override
+        public int hashCode() {
+            return id;
+        }
+
+        @Override
+        public String toString() {
+            return "Person{" +
+                    "id=" + id +
+                    '}';
+        }
+    }
+
 
 }

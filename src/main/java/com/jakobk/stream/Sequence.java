@@ -22,7 +22,7 @@ import java.util.stream.StreamSupport;
  *
  * This can be done using {@link Sequence} in the following way:
  * <pre>{@code
- *   List<Person> persons = Sequence.stream(1, 100).mapToObj(Person::new).collect(Collectors.toList());
+ *   List<Person> persons = Sequence.stream(0, 100).mapToObj(Person::new).collect(Collectors.toList());
  *   // use persons ...
  * }</pre>
  *
