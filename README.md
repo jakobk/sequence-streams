@@ -19,3 +19,5 @@ This can be done using Sequence in the following way:
 List<Person> persons = Sequence.stream(0, 100).mapToObj(Person::new).collect(Collectors.toList());
 // use persons ...
 ```
+
+Check out the following blog post to learn more: [Sequence Streams for Java 8](http://www.jakobk.com/2014/04/sequence-streams-for-java-8/)
